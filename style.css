@@ -49,7 +49,7 @@ h1 {
 
 /* Apariencia del jugador */
 #player {
-  background-image: url('../img/player.png');
+  background-image: url('/img/player.png');
   background-size: cover;
   background-color: transparent;
   border: 3px solid #3498db;
@@ -58,7 +58,7 @@ h1 {
 
 /* Apariencia de Beyoncé (enemiga) */
 #beyonce {
-  background-image: url('../img/beyonce.png');
+  background-image: url('/img/beyonce.png');
   background-size: cover;
   background-color: transparent;
   border: 3px solid #e74c3c;
