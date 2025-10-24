@@ -1,0 +1,222 @@
+/* Estilos globales y tipografía */
+body {
+  font-family: 'Bebas Neue', sans-serif;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  overflow: auto; /* permitir scroll para ver el footer en pantallas pequeñas */
+  min-height: 100vh;
+}
+
+/* Título principal */
+h1 {
+  font-size: 4rem;
+  margin-top: 10px;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Contenedor principal que agrupa área de juego y panel de controles */
+.game-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap; /* permite reflujo en pantallas pequeñas */
+}
+
+/* Área donde ocurren los eventos del juego (personajes y HUD) */
+.game-area {
+  position: relative;
+  width: 600px;
+  height: 600px;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+
+/* Estilos base para los sprites/personajes */
+.character {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  transition: left 0.05s linear, top 0.05s linear; /* movimiento suave */
+}
+
+/* Apariencia del jugador */
+#player {
+  background-image: url('../img/player.png');
+  background-size: cover;
+  background-color: transparent;
+  border: 3px solid #3498db;
+  box-shadow: 0 0 15px #3498db;
+}
+
+/* Apariencia de Beyoncé (enemiga) */
+#beyonce {
+  background-image: url('../img/beyonce.png');
+  background-size: cover;
+  background-color: transparent;
+  border: 3px solid #e74c3c;
+  animation: pulse 1.5s infinite; /* animación de pulso visual */
+}
+
+/* Keyframes para el efecto pulso */
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 10px #e74c3c; }
+  50% { box-shadow: 0 0 30px #e74c3c; }
+}
+
+/* Overlay de Game Over (centrado) */
+#game-over-screen {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+#game-over-screen h2 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+/* Párrafos dentro del overlay (tiempos mostrados) */
+#game-over-screen p {
+  margin: 8px 0;
+  font-size: 1.1rem;
+}
+
+/* Botones con estilo consistente */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 12px;
+  margin: 6px 4px;
+  background: linear-gradient(180deg, #555, #333);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(0,0,0,0.45); }
+.btn:active { transform: translateY(0); }
+.btn.active { outline: 2px solid rgba(255,255,255,0.12); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+
+/* Botón de reinicio con aspecto destacado */
+#reset-button {
+  background: linear-gradient(180deg, #3fdb92, #2ecc71);
+  color: #06120a;
+  border: none;
+}
+#reset-button:hover { transform: translateY(-2px); }
+
+/* Panel de controles (sliders y opciones) */
+#controls {
+  width: 300px;
+  max-width: 92vw;
+  padding: 14px;
+  background: linear-gradient(135deg, #4a4a4a, #2a2a2a);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.control-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.control-group label {
+  font-size: 1.3rem;
+}
+
+/* Estilos comunes para inputs tipo rango y color */
+input[type="range"],
+input[type="color"] {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* Pie de página simple (visible) */
+#site-footer {
+  margin-top: 18px;
+  padding: 12px 0;
+  font-size: 1rem;
+  color: #ddd;
+  text-align: center;
+  background: transparent;
+  position: relative;
+  z-index: 20;
+}
+
+/* Temporizador/HUD en la esquina superior derecha del área de juego */
+#timer {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: rgba(0,0,0,0.45);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #fff;
+  z-index: 80;
+  font-weight: 600;
+}
+
+/* Estado visual "muerto": cambia paleta a rojo cuando pierdes */
+body.dead {
+  background-color: #330000 !important;
+  color: #fff;
+}
+body.dead .game-area {
+  background: linear-gradient(135deg, #5a1a1a, #3a0a0a);
+}
+body.dead .character {
+  border-color: #ff3b3b !important;
+  box-shadow: 0 0 18px #ff3b3b !important;
+}
+body.dead #game-over-screen {
+  background: rgba(139,0,0,0.95);
+  color: #fff;
+}
+body.dead .btn, body.dead #controls {
+  filter: hue-rotate(-20deg) saturate(120%);
+}
+
+/* Imagen de controles: colocada dentro del área de juego en la esquina inferior izquierda */
+#controls-img {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  width: min(110px, 20%);
+  max-width: 110px;
+  height: auto;
+  opacity: 0.95;
+  z-index: 90; /* encima de personajes pero dentro del área */
+  border-radius: 8px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.5);
+  pointer-events: none; /* evita interferir con clicks */
+}
+
+/* Media queries: adaptación para pantallas pequeñas (móvil/tablet) */
+@media (max-width: 900px) {
+  .game-wrapper { flex-direction: column; align-items: center; gap: 16px; }
+  .game-area { width: 90vw; height: 90vw; max-width: 520px; max-height: 520px; }
+  #controls { width: 90vw; max-width: 520px; }
+  h1 { font-size: 2.5rem; }
+  #game-over-screen h2 { font-size: 2rem; }
+  .control-group label { font-size: 1.05rem; }
+}

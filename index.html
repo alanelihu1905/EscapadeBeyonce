@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <!-- Metadatos y título de la página -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Escapa de Beyoncé!</title>
+  <link rel="icon" type="image/x-icon" href="img/beyonce.png">
+
+  <!-- Fuente externa usada para el diseño visual -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+  <!-- Hoja de estilos principal -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Título principal del juego -->
+  <h1>¡Escapa de Beyoncé!</h1>
+
+  <div class="game-wrapper">
+    <!-- Área del juego donde se colocan los personajes y el HUD -->
+    <div class="game-area">
+      <!-- Jugador (elemento visual controlado por JS) -->
+      <div id="player" class="character"></div>
+
+      <!-- Beyoncé (enemiga) -->
+      <div id="beyonce" class="character"></div>
+
+      <!-- Imagen con las teclas de control (estática, dentro del área de juego) -->
+      <img id="controls-img" src="img/teclas.png" alt="teclas">
+
+      <!-- HUD: temporizador y mejor tiempo -->
+      <div id="timer">Tiempo: 0.0s | Mejor: <span id="best-time-display">0.0</span>s</div>
+
+      <!-- Pantalla de Game Over (oculta hasta que ocurra el evento) -->
+      <div id="game-over-screen">
+        <h2>¡Te atrapó Beyoncé!</h2>
+        <p id="last-time">Tu tiempo: 0.0s</p>
+        <p id="best-time">Mejor: 0.0s</p>
+        <button id="reset-button">Intentar de nuevo</button>
+      </div>
+    </div>
+
+    <!-- Panel de controles: sliders y ajustes del juego -->
+    <div id="controls">
+      <div class="control-group">
+        <label for="player-speed">Velocidad Jugador: <span id="player-speed-value">40</span></label>
+        <input id="player-speed" type="range" min="20" max="80" value="40">
+      </div>
+
+      <div class="control-group">
+        <label for="beyonce-speed">Velocidad Beyoncé: <span id="beyonce-speed-value">1</span></label>
+        <input id="beyonce-speed" type="range" min="1" max="10" step="0.5" value="1">
+      </div>
+
+      <div class="control-group">
+        <label for="beyonce-size">Tamaño Beyoncé: <span id="beyonce-size-value">50</span></label>
+        <input id="beyonce-size" type="range" min="30" max="150" value="50">
+      </div>
+
+      <hr>
+
+      <!-- Controles de color para personalizar bordes y fondo -->
+      <div class="control-group">
+        <label for="player-color">Color Bordes Jugador:</label>
+        <input id="player-color" type="color" value="#3498db">
+      </div>
+
+      <div class="control-group">
+        <label for="beyonce-color">Color Bordes Beyoncé:</label>
+        <input id="beyonce-color" type="color" value="#e74c3c">
+      </div>
+
+      <div class="control-group">
+        <label for="bg-color">Color Fondo:</label>
+        <input id="bg-color" type="color" value="#333333">
+      </div>
+
+      <hr>
+
+      <!-- Controles de música: el audio tiene autoplay/playsinline/preload para mejorar la reproducción automática -->
+      <div class="control-group">
+        <label>Música de Fondo:</label>
+        <audio id="bg-music" src="img/music.mp3" loop autoplay playsinline preload="auto"></audio>
+        <button id="play-music" class="btn">▶️</button>
+        <button id="pause-music" class="btn">⏸️</button>
+      </div>
+
+      <div class="control-group">
+        <label for="volume">Volumen:</label>
+        <input id="volume" type="range" min="0" max="1" step="0.1" value="0.5">
+      </div>
+    </div>
+  </div>
+
+  <!-- Pie de página con autor -->
+  <footer id="site-footer">Desarrollado por Alan Flores</footer>
+
+  <!-- Script principal del juego -->
+  <script src="app.js"></script>
+</body>
+</html>
